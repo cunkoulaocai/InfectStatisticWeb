@@ -10,122 +10,12 @@
 	<script src="${pageContext.request.contextPath }/js/china.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
 	<style type="text/css">
-	
-		.info-block {
-			height: 60px;
-			width: 100px;
-			position: absolute;
-		}
-		
-		.info-block:first-child {
-			top: 2px;
-			left: 15px;
-		}
-		
-		.info-block:nth-child(2) {
-			top: 2px;
-			left: 135px;
-		}
-		
-		.info-block:nth-child(3) {
-			top: 2px;
-			left: 255px;
-		}
-		.info-block:nth-child(4) {
-			top: 75px;
-			left: 15px;
-		}
-		
-		.info-block:nth-child(5) {
-			top: 75px;
-			left: 135px;
-		}
-		
-		.info-block:nth-child(6) {
-			top: 75px;
-			left: 255px;
-		}
 		.info-block > h1 {
 			font-size: 18px;
-			color: #353535;
-			margin: 2px auto;
-			text-align: center;
 		}
 		
 		.info-block > p {
 			font-size: 16px;
-			margin: 0 auto;
-			text-align: center;
-		}
-		
-		.info-block p:last-child {
-			font-size: 14px;
-			margin: 0;
-		}
-		#info-header {
-			height: 85px;
-		}
-		
-		#info-header-line {
-			height: 4px;
-			width: 240px;
-			margin: 1px auto;
-			background-color: #D9001B;
-		}
-		#info-header-line:first-child {
-			width: 140px;
-			height: 4px;
-			display: inline-block;
-			background-color: #D9001B;
-		}
-		#info-header-line:nth-child(2) {
-			width: 100px;
-			height: 4px;
-			display: inline-block;
-			background-color: rgba(236, 128, 141, 0.6);
-		}
-		#static-button {
-			margin: 3px auto;
-			width: 250px;
-			height: 40px;
-			border-radius: 15px;
-			font-size: 20px;
-			background-color: #D9001B;
-		}
-		
-		#data-main > div {
-			margin-top: 2px;
-			padding: 0;
-		}
-		#info-buttom {
-			height: 30px;
-			width: 300px;
-			margin: 2px auto;
-			border-color: black;
-		}
-		#info-buttom-line {
-			width: 240px;
-			height: 4px;
-			background-color: rgba(98, 0, 238, 0.6);
-			margin: 1px auto;
-		}
-		/* 信息页面的最下面部分 */
-		#info-buttom > button {
-			height: 26px;
-			width: 134px;
-			background-color: #D7D7D7;
-			font-size: 13px;
-			color: #333333;
-			text-align: center;
-			display: inline-block;
-			margin-left: 10px;
-		}
-		#footer span {
-			font-size: 12px;
-			color: #EC808D;
-			display: block;
-			line-height: 54px;
-			margin: 0 auto;
 		}
 	</style>
 </head>
@@ -134,82 +24,68 @@
 		<!-- 头部区域 -->
 		<div id="header" style="width: 360px;height: 60px;background-color: #6200EE;">
 			<button type="button" class="btn btn-default" aria-label="Left Align">
-			  <span class="glyphicon glyphicon-align-left" aria-hidden="true">疫情统计</span>
+			  <span class="glyphicon glyphicon-align-left" aria-hidden="true">yi'qing'xin'wen</span>
 			</button>	
-			<span style="font-size: 20px;color: white;line-height: 20px;">疫情统计</span>
-			<button type="button" class="btn btn-default" aria-label="Left Align">
-			  <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
-			</button>	
+			<span>疫情新闻</span>
 		</div>
 		<!-- 身体区域 -->
-		<div id="body" style="width: 360px;height: 546px;">
-			<!-- 按钮+实时数据标签+横线 -->
-			<div id="info-header">
-				<button type="button" class="btn btn-primary btn-lg btn-block" id="static-button">疫情统计</button>
-				<div style="margin: 0 auto;border-radius: 15px;width: 60px;height: 24px;border: 1px solid #009999;
-					font-size: 12px;line-height: 24px;">实时数据</div>
-				<div id="info-header-line">
-					<div></div>
-					<div></div>
-				</div>
-			</div>
-			<!-- 显示信息区域 -->
-			<div id="info" style="width: 360px; height: 150px;position: relative;">
+		<div id="body" style="width: 360px;height:600px;">
+			<!-- 显示信息取域 -->
+			<div id="info" style="width: 360px; height:250px;">
+				<button type="button" class="btn btn-primary btn-lg btn-block">（块级元素）Block level button</button>
 				
-				<!-- 显示6个数据项 -->
-				<div class="info-block">
-					<h1>现存确证</h1>
-					<p style="color: #D9001B;">51325</p>
-					<p>昨日+2</p>
+				<div style="width: 200px;height: 2px;background-color: #D9001B">
+					<div style="float: left;width: 90px;height: 66px" class="info-block">
+						<h1>现存确证</h1>
+						<p>51325</p>
+						<p>昨日+2</p>
+					</div>
+					<div style="float: left;width: 90px;height: 66px" class="info-block">
+						<h1>现存确证</h1>
+						<p>51325</p>
+						<p>昨日+2</p>
+					</div>
+					<div style="float: left;width: 90px;height: 66px" class="info-block">
+						<h1>现存确证</h1>
+						<p>51325</p>
+						<p>昨日+2</p>
+					</div>
+					<div style="float: left;width: 90px;height: 66px" class="info-block">
+						<h1>现存确证</h1>
+						<p>51325</p>
+						<p>昨日+2</p>
+					</div>
+					<div style="float: left;width: 90px;height: 66px" class="info-block">
+						<h1>现存确证</h1>
+						<p>51325</p>
+						<p>昨日+2</p>
+					</div>
+					<div style="float: left;width: 90px;height: 66px" class="info-block">
+						<h1>现存确证</h1>
+						<p>51325</p>
+						<p>昨日+2</p>
+					</div>
+					
+					<a href="#" class="btn btn-primary btn-lg active" role="button">Primary link</a>
+					<a href="#" class="btn btn-primary btn-lg active" role="button">Primary link</a>
 				</div>
-				<div class="info-block">
-					<h1>现存确证</h1>
-					<p style="color: #FF6A57;">51325</p>
-					<p>昨日+2</p>
-				</div>
-				<div class="info-block">
-					<h1>现存确证</h1>
-					<p style="color: #476DA0;">51325</p>
-					<p>昨日+2</p>
-				</div>
-				<div class="info-block">
-					<h1>现存确证</h1>
-					<p style="color: #02A7F0;">51325</p>
-					<p>昨日+2</p>
-				</div>
-				<div class="info-block">
-					<h1>现存确证</h1>
-					<p style="color: #A30014;">51325</p>
-					<p>昨日+2</p>
-				</div>
-				<div class="info-block">
-					<h1>现存确证</h1>
-					<p style="color: #70B603;">51325</p>
-					<p>昨日+2</p>
-				</div>		
-
+				
+				<!-- 显示6个文字信息 -->
+				
 			</div>  
-			<!-- 下横线+切换按钮 -->
-			<div id="info-buttom">
-				<div id="info-buttom-line">
-					<div></div>
-					<div></div>
-				</div>
-				<button type="button" class="btn btn-primary">现存确诊</button>
-				<button type="button" class="btn btn-primary">累计确诊</button>
-			</div>
+			
 			<!-- 图表区域 -->
-			<div id="main" style="width: 360px;height: 250px;margin: 0 auto;"></div>
+			<div id="main" style="width: 328px; height:275px;"></div>  
 		</div>
 		
 		<!-- 底栏 -->
 		<div id="footer" style="width: 360px;height: 54px;background-color: #FACD91;">
-			<span>如果你有意愿支持武汉	请点:<em style="color: #6200EE;">一点爱心</em></span>
+			<span>如果你有意愿支持武汉	请点一点爱心</span>
 		</div>
 	</div>
 	
-	<script type="text/javascript" src="js/juqery-3.3.1.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/juqery-3.3.1.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 <script>
 var chart = echarts.init(document.getElementById('main'));
 chart.setOption({
