@@ -8,6 +8,7 @@
 
 	<script src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
 	<script src="${pageContext.request.contextPath }/js/china.js"></script>
+	<script src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<style type="text/css">
 		.info-block > h1 {
@@ -75,7 +76,7 @@
 			</div>  
 			
 			<!-- 图表区域 -->
-			<div id="main" style="width: 328px; height:275px;"></div>  
+			<div id="chart" style="width: 328px; height:275px;"></div>  
 		</div>
 		
 		<!-- 底栏 -->
@@ -84,116 +85,166 @@
 		</div>
 	</div>
 	
-	<script type="text/javascript" src="js/juqery-3.3.1.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script>
-var chart = echarts.init(document.getElementById('main'));
-chart.setOption({
-    title: {
-        text: '全国地图',
-        subtext: '该页面的数据仅供参考',
-    },
-    tooltip: {
-        formatter:function(params){
-            return params.name+'<br />'+'确诊人数：'+params['data']['value']+'<br />'+'死亡人数：'
-            +params['data']['dead']+'<br />'+'治愈人数：'+params['data']['cure'];
-        }//数据格式化
-    },
-    toolbox: {
-        show: true,
-        orient: 'vertical',
-        left: 'right',
-        top: 'center',
-        feature: {
-            dataView: {readOnly: false},
-            restore: {},
-            saveAsImage: {}
-        }
-    },
-    visualMap: {
-        min: 0,
-        max: 40000,
-        left: 'left',
-        top: 'bottom',
-        text: ['多','少'],
-        inRange: {
-            color: ['lightskyblue', 'yellow', 'orangered']
-        },
-        show:true
-    },
-    series: [{
-        type: 'map',
-        map: 'china',
-        label:{
-            show: true
-        },
-        nameMap:{
-            
-            "南海诸岛" : "南海诸岛",
-             '北京'   :'北京市',
-             '天津'   :'天津市',
-             '上海'   :'上海市',
-             '重庆'   :'重庆市',
-             '河北'   :'河北省',
-             '河南'   :'河南省',
-             '云南'   :'云南省',
-             '辽宁'   :'辽宁省',
-             '黑龙江'  :  '黑龙江省',
-             '湖南'   :'湖南省',
-             '安徽'   :'安徽省',
-             '山东'   :'山东省',
-             '新疆' :'新疆维吾尔自治区',
-             '江苏' :'江苏省',
-             '浙江' :'浙江省',
-             '江西' :'江西省',
-             '湖北' :'湖北省',
-             '广西' : '广西壮族自治区',
-             '甘肃' :'甘肃省',
-             '山西' :'山西省',
-             '内蒙古' : "内蒙古自治区",
-             '陕西'  :'陕西省',
-             '吉林'  :'吉林省',
-             '福建'  :'福建省',
-             '贵州'  :'贵州省',
-             '广东'  :'广东省',
-             '青海'  :'青海省',
-             '西藏'  :'西藏自治区',
-             '四川'  :'四川省',
-             '宁夏' :'宁夏回族自治区',
-             '海南' :'海南省',
-             '台湾' :'台湾',
-             '香港' :'香港',
-             '澳门' :'澳门'
-        }
-    }
-    ]
-});
 
-//异步加载数据
-$.ajax({
-   type : "get",
-   async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
-   url : "https://api.yonyoucloud.com/apis/dst/ncov/country",    //请求发送到TestServlet处
-   success : function(resultJson) {
-       var result= jQuery.parseJSON(resultJson);
-       //请求成功时执行该函数内容，result即为服务器返回的json对象
-       if (result) {
-               chart.setOption({        //加载数据图表
-                  series: [{
-                      data: result
-                  }]
-              });
-              
-       }
-  },
-   error : function(errorMsg) {
-       //请求失败时执行该函数
-   alert("图表请求数据失败!");
-   }
-});
+<script type="text/javascript">
+var myChart = echarts.init(document.getElementById('chart'));
+var dataSource = [];
+var dimensions = ['日期', '累计确诊', '现有确诊（含重症）', '现有疑似', '现有重症', '累计死亡', '累计治愈',
+	'累计确诊+现有疑似', '新增确诊', '新增疑似', '新增(疑似+确诊)', '观察中', '死亡/确诊'];
+option = {
+	title: {
+		text: '全国新型肺炎疫情趋势',
+		x: 'center',
+		y: 'top',
+		top: '15px',
+		subtext: '(支持缩放及左右滑动)',
+		subtextStyle: {
+			fontSize: 12
+		}
+	},
+	legend: {
+		type: 'scroll',
+		x: 'center',
+		y: 'bottom',
+		padding: [0, 20],
+		itemGap: 3,
+		selected: {}
+	},
+	grid: {
+		left: '15%',
+		bottom: '40px'
+	},
+	tooltip: {},
+	dataset: {
+		dimensions: dimensions,
+		source: dataSource,
+	},
+	xAxis: { type: 'category' },
+	yAxis: {},
+	dataZoom: [
+		{
+			type: 'inside',
+			throttle: '50',
+			minValueSpan: 7,
+			start: 100,
+			end: 100
+		}],
+	series: [
+		{ type: 'bar' },
+		{ type: 'bar' },
+		{ type: 'bar' },
+		{ type: 'bar' },
+		{ type: 'bar' },
+		{ type: 'bar' },
+		{
+			type: 'line',
+			label: {
+				normal: {
+					show: true,
+					position: 'top',
+				},
 
+
+			}
+		},
+		{
+			type: 'line',
+			label: {
+				normal: {
+					show: true,
+					position: 'top',
+				},
+
+
+			}
+		},
+		{
+			type: 'line',
+			label: {
+				normal: {
+					show: true,
+					position: 'top',
+				},
+
+
+			}
+		},
+		{
+			type: 'line',
+			label: {
+				normal: {
+					show: true,
+					position: 'top',
+				}
+			}
+		},
+		{
+			type: 'line',
+			label: {
+				normal: {
+					show: true,
+					position: 'top',
+				}
+			}
+		},
+		{
+			type: 'line',
+			label: {
+				normal: {
+					show: true,
+					position: 'top',
+					formatter: function (params) {
+						str = params.data['死亡/确诊'] + '%'
+						return str;
+					}
+				}
+			},
+			tooltip: {
+				formatter: function (item) {
+					str = item.seriesName + "<br>"
+						+ item.marker + ' ' + item.data['日期'] + ' : ' + item.data['死亡/确诊'] + '%';
+					return str;
+				}
+
+			}
+		}
+	]
+};
+
+$.ajaxSettings.async = false;
+$.getJSON("../Json/data.json?" + Date.parse(new Date()), function (data) {
+	dataSource = data;
+
+	option.legend.selected['累计确诊'] = false;
+	option.legend.selected['累计确诊+现有疑似'] = false;
+	option.legend.selected['观察中'] = true;
+	option.legend.selected['死亡/确诊'] = true;
+	option.legend.selected['新增确诊'] = false;
+	option.legend.selected['新增疑似'] = false;
+	option.legend.selected['新增(疑似+确诊)'] = false;
+	option.dataset.source = dataSource;
+
+	var yesterday_data = data.filter(item =>
+		(new Date(item.日期)).Format("yyyy/M/d") == (new Date()).DateAdd("d", -1).Format("yyyy/M/d")
+	);
+	console.log(yesterday_data);
+	if (yesterday_data.length > 0) {
+		yesterday_confirmed = ~~yesterday_data[0]["累计确诊"];
+		yesterday_died = ~~yesterday_data[0]["累计死亡"];
+		yesterday_cured = ~~yesterday_data[0]["累计治愈"];
+
+		yesterday_current_confirmed = ~~yesterday_data[0]["现有确诊（含重症）"];
+		yesterday_current_serious = ~~yesterday_data[0]["现有重症"];
+		yesterday_current_unconfirmed = ~~yesterday_data[0]["现有疑似"];
+
+	}
+})
+
+
+myChart.setOption(option);
+window.onresize = () => this.myChart.resize();
 </script>
-
 
 </body>
 </html>
