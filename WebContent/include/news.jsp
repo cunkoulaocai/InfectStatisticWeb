@@ -8,6 +8,9 @@
 
 	<script src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
 	<script src="${pageContext.request.contextPath }/js/china.js"></script>
+	<script src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
+	<script src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
+	<script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
 	<style type="text/css">
 		
@@ -41,7 +44,7 @@
 		}
 		
 		.news-block .content {
-			font-size: 13px; 
+			font-size: 10px; 
 			margin-top: 2px;
 			margin-bottom: 0;
 			margin-left:3px;
@@ -54,7 +57,7 @@
 			margin-left:3px;
 			margin-bottom: 0;
 		}
-		.footer {
+		#footer {
 			position: absolute;
 			left: 0;
 			top: 606px;
@@ -100,33 +103,33 @@
 		<!-- 身体区域 -->
 		<div id="body" style="width: 360px;height:546px;overflow: auto;">
 			<div class="news-block">
-				<h1 class="title">抗击疫情：疫情期间保证日常诊疗秩序</h1>
+				<h1 class="title"></h1>
 				<p class="time">发布时间<span>2020/3/3 23:01</span></p>
-				<p class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</p>
+				<div class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</div>
 				<p class="source">信息来源:<span>人民网</span></p>
 			</div>
 			<div class="news-block">
 				<h1 class="title">抗击疫情：疫情期间保证日常诊疗秩序</h1>
 				<p class="time">发布时间<span>2020/3/3 23:01</span></p>
-				<p class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</p>
+				<div class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</div>
 				<p class="source">信息来源:<span>人民网</span></p>
 			</div>
 			<div class="news-block">
 				<h1 class="title">抗击疫情：疫情期间保证日常诊疗秩序</h1>
 				<p class="time">发布时间<span>2020/3/3 23:01</span></p>
-				<p class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</p>
+				<div class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</div>
 				<p class="source">信息来源:<span>人民网</span></p>
 			</div>
 			<div class="news-block">
 				<h1 class="title">抗击疫情：疫情期间保证日常诊疗秩序</h1>
 				<p class="time">发布时间<span>2020/3/3 23:01</span></p>
-				<p class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</p>
+				<div class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</div>
 				<p class="source">信息来源:<span>人民网</span></p>
 			</div>
 			<div class="news-block">
 				<h1 class="title">抗击疫情：疫情期间保证日常诊疗秩序</h1>
 				<p class="time">发布时间<span>2020/3/3 23:01</span></p>
-				<p class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</p>
+				<div class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</div>
 				<p class="source">信息来源:<span>人民网</span></p>
 			</div>
 		</div>
@@ -137,10 +140,45 @@
 			<p class="right">一定爱心</p>
 		</div>
 	</div>
+<script>	
+	function getNewsData(){
+		console.log("111")
+		$.ajax({
+			   url : "http://www.dzyong.top:3005/yiqing/news",
+			   dataType: "json",
+			   success : function(data) {
+				   var news = data.data;
+				   var newArr = [];
+				   //console.log(data.data)
+	       		   console.log(news[0].createTime)
+	       		   for (var i = 0; i < news.length; i++) {
+	       			var json = {
+	     	               title: news[i].title,
+	     	               time: news[i].createTime,
+	     	               content: news[i].summary,
+	     	               source: news[i].infoSource,
+	     	             }
+	       			newArr.push(json)
+	       		   }
+	       		   console.log(newArr)
+				   
+				   var titles = document.getElementsByClassName("title");
+				   var times = document.getElementsByClassName("time");
+				   var contents = document.getElementsByClassName("content");
+				   var sources = document.getElementsByClassName("source");
+				   for(var i=0;i<titles.length;i++) {
+					   titles[i].innerHTML=newArr[i].title;
+					   times[i].innerHTML=newArr[i].time;
+					   contents[i].innerHTML=newArr[i].content;
+					   sources[i].innerHTML=newArr[i].source;
+					   }
+	       		   }
+		
+	});
+	}
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/juqery-3.3.1.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
-
+    getNewsData();
+</script>
 
 </body>
 </html>
