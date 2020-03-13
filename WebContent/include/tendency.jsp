@@ -206,9 +206,9 @@
 			<!-- 切换选项 -->
 			<div class="switch">
 				<ul class="nav nav-pills">
-				  	<li role="presentation" class="active"><a href="#">新增确认趋势</a></li>
-				  	<li role="presentation"><a href="#">累计确认趋势</a></li>
-				  	<li role="presentation"><a href="#">累计死亡/治愈</a></li>
+				  	<li role="presentation" class="active" id="total">全国总体趋势</li>
+				  	<li role="presentation" id="now">全国累积确诊</li>
+				  	<li role="presentation" id="dead">全国累计死亡</li>
 				</ul>
 			</div>   
 			
@@ -229,7 +229,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-	//var myChart = echarts.init(document.getElementById('chart'));
+	var myChart = echarts.init(document.getElementById('chart'));
 	var dataSource = [];
 	var dimensions = ['日期', '累计确诊', '现有确诊（含重症）', '现有疑似', '现有重症', '累计死亡', '累计治愈',
 		'累计确诊+现有疑似', '新增确诊', '新增疑似', '新增(疑似+确诊)', '观察中', '死亡/确诊'];
@@ -410,6 +410,87 @@
 		    ],
 		};
 	
+	var dimension2 = [ ];
+	var dataSource2 = [];
+	country_option = {
+			title : {
+		        text: '趋势图',
+		    },
+		    tooltip: {},
+		    legend: {
+		    	
+			},
+		    dataset: {
+				dimensions: dimension2,
+				source: dataSource2,
+			},
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            mark : {show: true},
+		            magicType : {show: true, type: ['line', 'bar']},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    calculable : true,
+		    xAxis: { type: 'category' },
+		    yAxis: {},
+		    series : [
+				{
+					type: 'line',
+					label: {
+						normal: {
+							show: true,
+							position: 'top',
+						},
+		
+		
+					}
+				},
+		    ],
+		};
+	
+	var dimension3 = [ ];
+	var dataSource3 = [];
+	country_option1 = {
+			title : {
+		        text: '趋势图',
+		    },
+		    tooltip: {},
+		    legend: {
+		    	
+			},
+		    dataset: {
+				dimensions: dimension3,
+				source: dataSource3,
+			},
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            mark : {show: true},
+		            magicType : {show: true, type: ['line', 'bar']},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    calculable : true,
+		    xAxis: { type: 'category' },
+		    yAxis: {},
+		    series : [
+		    	{ type: 'bar' },
+				{
+					type: 'line',
+					label: {
+						normal: {
+							show: true,
+							position: 'top',
+						},
+		
+		
+					}
+				},
+		    ],
+		};
+	
 	
 	function getEchartData(param) {
     	var myChart = null;
@@ -459,9 +540,49 @@
 	});
 	}
 	
-	//window.onresize = () => this.myChart.resize();
+	window.onresize = () => this.myChart.resize();
+	
 	}
 	
+	function setEchart1(){
+		$.ajaxSettings.async = true;
+		$.getJSON("../Json/data.json?" + Date.parse(new Date()), function (data) {
+			console.log(data[0]["日期"])
+			dimension2.push("更新日期");
+			dimension2.push("累计确诊");
+			for(var i=0;i<data.length;i++){
+			var json = {
+	               	"更新日期": data[i]["日期"],
+	              	"累计确诊": data[i]["累计确诊"],
+	         }
+			dataSource2.push(json);
+			}
+			
+		   myChart.setOption(country_option,true);
+			
+		})
+	}
+	
+	function setEchart2(){
+		$.ajaxSettings.async = true;
+		$.getJSON("../Json/data.json?" + Date.parse(new Date()), function (data) {
+			console.log(data[0]["日期"])
+			dimension3.push("更新日期");
+			dimension3.push("累计死亡");
+			dimension3.push("死亡/确诊");
+			for(var i=0;i<data.length;i++){
+			var json = {
+	               	"更新日期": data[i]["日期"],
+	              	"累计死亡": data[i]["累计死亡"],
+	              	"死亡/确诊": data[i]["死亡/确诊"],
+	         }
+			dataSource3.push(json);
+			}
+			
+		   myChart.setOption(country_option1,true);
+			
+		})
+	}
 	
 	
 	getEchartData("china");
@@ -482,6 +603,23 @@
 			}	
 		})(i)
 		};
+		
+		document.getElementById("total").onclick = function(){
+			document.getElementById("show").innerHTML="全国";
+			getEchartData("china");
+		}
+		
+		document.getElementById("now").onclick=function(){
+			document.getElementById("show").innerHTML="全国";
+			setEchart1();
+		}
+		
+		document.getElementById("dead").onclick=function(){
+			document.getElementById("show").innerHTML="全国";
+			setEchart2();
+		}
+			
+		
 	
 	
 </script>
