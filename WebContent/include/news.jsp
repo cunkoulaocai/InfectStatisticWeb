@@ -8,9 +8,6 @@
 
 	<script src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
 	<script src="${pageContext.request.contextPath }/js/china.js"></script>
-	<script src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
-	<script src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
-	<script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
 	<style type="text/css">
 		
@@ -44,7 +41,7 @@
 		}
 		
 		.news-block .content {
-			font-size: 10px; 
+			font-size: 13px; 
 			margin-top: 2px;
 			margin-bottom: 0;
 			margin-left:3px;
@@ -57,7 +54,7 @@
 			margin-left:3px;
 			margin-bottom: 0;
 		}
-		#footer {
+		.footer {
 			position: absolute;
 			left: 0;
 			top: 606px;
@@ -82,6 +79,29 @@
 		::-webkit-scrollbar {
 			display: none;
 		}
+		
+		#popup {
+			width: 212px;
+			height: 519px;
+			position: absolute;
+			background-color: #8080FF;
+			display: none;
+			z-index: 999;
+		}
+		
+		.blogroll {
+			font-size: 18px;
+			border-color: #8080FF;
+			
+		}
+		
+		.blogroll li {
+			background-color: #8080FF;
+			border: 0px;
+		}
+		.blogroll a {
+			color: black;
+		}
 	</style>
 </head>
 <body>
@@ -90,7 +110,7 @@
 		<div id="header" style="width: 360px;height: 60px;background-color: #6200EE;">
 			<button type="button" class="btn btn-default" aria-label="Justify" style="height: 60px;width: 40px;
 					background-color: #6200EE;border-color: #6200EE;">
-			  	<span class="glyphicon glyphicon-align-left" aria-hidden="true" style="font-size: 30px;color: white;"></span>
+			  	<span class="glyphicon glyphicon-align-left popup-icon" aria-hidden="true" style="font-size: 30px;color: white;"></span>
 			</button>	
 			<span style="font-size: 20px;color: white;line-height: 20px;margin-left: 10px;">疫情新闻</span>
 			<button type="button" class="btn btn-default" aria-label="Justify" style="height: 60px;width: 40px;
@@ -99,37 +119,48 @@
 			</button>
 		</div>
 		
-		
+		<!-- 弹出框 -->
+		<div id="popup">
+			<p style="height: 52px;width: 212px;font-size: 20px;margin: 10px 0px;">疫情</p>
+			<ul class="list-group blogroll">
+			  <li class="list-group-item"><a href="statistics.jsp">疫情统计</a></li>
+			  <li class="list-group-item"><a href="tendency.jsp">疫情趋势</a></li>
+			  <li class="list-group-item"><a href="news.jsp">疫情新闻</a></li>
+			  <li class="list-group-item"><a href="rumor-broken.jsp">谣言粉碎机</a></li>
+			  <li class="list-group-item"><a href="medical-information.jsp">医疗信息查询</a></li>
+			  <li class="list-group-item"><a href="contribution.jsp">奉献</a></li>
+			</ul>
+		</div>
 		<!-- 身体区域 -->
 		<div id="body" style="width: 360px;height:546px;overflow: auto;">
 			<div class="news-block">
-				<h1 class="title"></h1>
+				<h1 class="title">抗击疫情：疫情期间保证日常诊疗秩序</h1>
 				<p class="time">发布时间<span>2020/3/3 23:01</span></p>
-				<div class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</div>
+				<p class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</p>
 				<p class="source">信息来源:<span>人民网</span></p>
 			</div>
 			<div class="news-block">
 				<h1 class="title">抗击疫情：疫情期间保证日常诊疗秩序</h1>
 				<p class="time">发布时间<span>2020/3/3 23:01</span></p>
-				<div class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</div>
+				<p class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</p>
 				<p class="source">信息来源:<span>人民网</span></p>
 			</div>
 			<div class="news-block">
 				<h1 class="title">抗击疫情：疫情期间保证日常诊疗秩序</h1>
 				<p class="time">发布时间<span>2020/3/3 23:01</span></p>
-				<div class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</div>
+				<p class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</p>
 				<p class="source">信息来源:<span>人民网</span></p>
 			</div>
 			<div class="news-block">
 				<h1 class="title">抗击疫情：疫情期间保证日常诊疗秩序</h1>
 				<p class="time">发布时间<span>2020/3/3 23:01</span></p>
-				<div class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</div>
+				<p class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</p>
 				<p class="source">信息来源:<span>人民网</span></p>
 			</div>
 			<div class="news-block">
 				<h1 class="title">抗击疫情：疫情期间保证日常诊疗秩序</h1>
 				<p class="time">发布时间<span>2020/3/3 23:01</span></p>
-				<div class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</div>
+				<p class="content">为了减少患者聚集，医院严格实行了预检分诊制度，初诊患者可通过网络、电话、现场预约等方式选择就诊时段，而对于复诊患者，医院引导使用互联网诊疗</p>
 				<p class="source">信息来源:<span>人民网</span></p>
 			</div>
 		</div>
@@ -140,6 +171,7 @@
 			<p class="right">一定爱心</p>
 		</div>
 	</div>
+
 <script>	
 	function getNewsData(){
 		console.log("111")
@@ -179,6 +211,16 @@
 	
     getNewsData();
 </script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 
+	<script type="text/javascript">
+	$(function() {
+		$(".popup-icon").click(function() {
+			$("#popup").slideToggle();
+		})
+	})
+	</script>
 </body>
 </html>

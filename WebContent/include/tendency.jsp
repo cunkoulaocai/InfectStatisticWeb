@@ -116,6 +116,7 @@
 			height: 37px;
 			background-color: #6200EE;
 			margin:5px auto;
+
 		}
 		
 		.switch li {
@@ -156,6 +157,70 @@
 			margin-right: 100px;
 			font-size: 15px;
 		}
+		
+		#popup {
+			width: 212px;
+			height: 519px;
+			position: absolute;
+			background-color: #8080FF;
+			display: none;
+			z-index: 999;
+		}
+		
+		.blogroll {
+			font-size: 18px;
+			border-color: #8080FF;
+			
+		}
+		
+		.blogroll li {
+			background-color: #8080FF;
+			border: 0px;
+		}
+		.blogroll a {
+			color: black;
+
+		}
+		
+		.switch li {
+			width: 105px;
+			height: 37px;
+			background-color: #6200EE;
+			color: white;
+			font-size: 14px;
+			line-height: 37px;
+			text-align: center;
+		}
+		
+		.switch li a {
+			padding: 0 2px;
+			color: white;
+		}
+		.switch li a:hover {
+			background-color: #337ab7;
+		}
+		.footer {
+			position: absolute;
+			left: 0;
+			top: 606px;
+		}
+		
+		.footer .left{
+			float: left;
+			height: 50px;
+			line-height: 50px;
+			color: #EC808D;
+		}
+		
+		.footer .right {
+			float: right;
+			height: 50px;
+			line-height: 50px;
+			color: #6200EE;
+			margin-right: 100px;
+			font-size: 15px;
+
+		}
 	</style>
 </head>
 <body>
@@ -164,13 +229,31 @@
 		<div id="header" style="width: 360px;height: 60px;background-color: #6200EE;">
 			<button type="button" class="btn btn-default" aria-label="Justify" style="height: 60px;width: 40px;
 					background-color: #6200EE;border-color: #6200EE;">
+
+			  	<span class="glyphicon glyphicon-align-left popup-icon" aria-hidden="true" style="font-size: 30px;color: white;"></span>
+
 			  	<span class="glyphicon glyphicon-align-left" aria-hidden="true" style="font-size: 30px;color: white;"></span>
+
 			</button>	
 			<span style="font-size: 20px;color: white;line-height: 20px;margin-left: 10px;">疫情趋势</span>
 			<button type="button" class="btn btn-default" aria-label="Justify" style="height: 60px;width: 40px;
 					background-color: #6200EE;border-color: #6200EE;float: right;margin-right: 10px;">
 			  	<span class="glyphicon glyphicon-option-vertical" aria-hidden="true" style="font-size: 30px;color: white;"></span>
 			</button>
+
+		</div>
+		<div id="popup">
+			<p style="height: 52px;width: 212px;font-size: 20px;margin: 10px 0px;">疫情</p>
+			<ul class="list-group blogroll">
+			  <li class="list-group-item"><a href="statistics.jsp">疫情统计</a></li>
+			  <li class="list-group-item"><a href="tendency.jsp">疫情趋势</a></li>
+			  <li class="list-group-item"><a href="news.jsp">疫情新闻</a></li>
+			  <li class="list-group-item"><a href="rumor-broken.jsp">谣言粉碎机</a></li>
+			  <li class="list-group-item"><a href="medical-information.jsp">医疗信息查询</a></li>
+			  <li class="list-group-item"><a href="contribution.jsp">奉献</a></li>
+			</ul>
+
+
 		</div>
 		
 		<!-- 身体区域 -->
@@ -214,6 +297,16 @@
 			
 			
 			<!-- 图表 -->
+			<div id="main" style="width: 334px;height: 263px;margin: 0 auto;"></div>
+
+				  	<li role="presentation" class="active" id="total">全国总体趋势</li>
+				  	<li role="presentation" id="now">全国累积确诊</li>
+				  	<li role="presentation" id="dead">全国累计死亡</li>
+				</ul>
+			</div>   
+			
+			
+			<!-- 图表 -->
 			<div id="chart" style="width: 334px;height: 263px;margin: 0 auto;"></div>
 			<!-- <div id="main" style="width: 334px;height: 263px;margin: 0 auto;display: none;"></div>
 			<div id="main" style="width: 334px;height: 263px;margin: 0 auto;display: none;"></div> -->
@@ -229,6 +322,15 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
+      
+        
+        $(function() {
+			$(".popup-icon").click(function() {
+				$("#popup").slideToggle();
+			})
+		})
+    </script>
+<script type="text/javascript">
 	var myChart = echarts.init(document.getElementById('chart'));
 	var dataSource = [];
 	var dimensions = ['日期', '累计确诊', '现有确诊（含重症）', '现有疑似', '现有重症', '累计死亡', '累计治愈',
