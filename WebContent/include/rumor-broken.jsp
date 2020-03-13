@@ -63,6 +63,29 @@
 		::-webkit-scrollbar {
 			display: none;
 		}
+		
+		#popup {
+			width: 212px;
+			height: 519px;
+			position: absolute;
+			background-color: #8080FF;
+			display: none;
+			z-index: 999;
+		}
+		
+		.blogroll {
+			font-size: 18px;
+			border-color: #8080FF;
+			
+		}
+		
+		.blogroll li {
+			background-color: #8080FF;
+			border: 0px;
+		}
+		.blogroll a {
+			color: black;
+		}
 	</style>
 </head>
 <body>
@@ -71,13 +94,26 @@
 		<div id="header" style="width: 360px;height: 60px;background-color: #6200EE;">
 			<button type="button" class="btn btn-default" aria-label="Justify" style="height: 60px;width: 40px;
 					background-color: #6200EE;border-color: #6200EE;">
-			  	<span class="glyphicon glyphicon-align-left" aria-hidden="true" style="font-size: 30px;color: white;"></span>
+			  	<span class="glyphicon glyphicon-align-left popup-icon" aria-hidden="true" style="font-size: 30px;color: white;"></span>
 			</button>	
 			<span style="font-size: 20px;color: white;line-height: 20px;margin-left: 10px;">谣言粉碎机</span>
 			<button type="button" class="btn btn-default" aria-label="Justify" style="height: 60px;width: 40px;
 					background-color: #6200EE;border-color: #6200EE;float: right;margin-right: 10px;">
 			  	<span class="glyphicon glyphicon-option-vertical" aria-hidden="true" style="font-size: 30px;color: white;"></span>
 			</button>
+		</div>
+		
+		<!-- 弹出框 -->
+		<div id="popup">
+			<p style="height: 52px;width: 212px;font-size: 20px;margin: 10px 0px;">疫情</p>
+			<ul class="list-group blogroll">
+			  <li class="list-group-item"><a href="statistics.jsp">疫情统计</a></li>
+			  <li class="list-group-item"><a href="tendency.jsp">疫情趋势</a></li>
+			  <li class="list-group-item"><a href="news.jsp">疫情新闻</a></li>
+			  <li class="list-group-item"><a href="rumor-broken.jsp">谣言粉碎机</a></li>
+			  <li class="list-group-item"><a href="medical-information.jsp">医疗信息查询</a></li>
+			  <li class="list-group-item"><a href="contribution.jsp">奉献</a></li>
+			</ul>
 		</div>
 		<!-- 身体区域 -->
 		<div id="body" style="width: 360px;height: 546px;overflow: auto;">
@@ -117,7 +153,14 @@
 		</div>
 	</div>
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/juqery-3.3.1.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$(".popup-icon").click(function() {
+			$("#popup").slideToggle();
+		})
+	})
+	</script>
 </body>
 </html>
