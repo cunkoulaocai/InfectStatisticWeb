@@ -171,6 +171,46 @@
 			<p class="right">一定爱心</p>
 		</div>
 	</div>
+
+<script>	
+	function getNewsData(){
+		console.log("111")
+		$.ajax({
+			   url : "http://www.dzyong.top:3005/yiqing/news",
+			   dataType: "json",
+			   success : function(data) {
+				   var news = data.data;
+				   var newArr = [];
+				   //console.log(data.data)
+	       		   console.log(news[0].createTime)
+	       		   for (var i = 0; i < news.length; i++) {
+	       			var json = {
+	     	               title: news[i].title,
+	     	               time: news[i].createTime,
+	     	               content: news[i].summary,
+	     	               source: news[i].infoSource,
+	     	             }
+	       			newArr.push(json)
+	       		   }
+	       		   console.log(newArr)
+				   
+				   var titles = document.getElementsByClassName("title");
+				   var times = document.getElementsByClassName("time");
+				   var contents = document.getElementsByClassName("content");
+				   var sources = document.getElementsByClassName("source");
+				   for(var i=0;i<titles.length;i++) {
+					   titles[i].innerHTML=newArr[i].title.substring(0,20)+"..";
+					   times[i].innerHTML=newArr[i].time;
+					   contents[i].innerHTML=newArr[i].content;
+					   sources[i].innerHTML=newArr[i].source;
+					   }
+	       		   }
+		
+	});
+	}
+	
+    getNewsData();
+</script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>

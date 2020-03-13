@@ -134,7 +134,7 @@
 	<div id="wapper" style="width: 360px;height: 660px;border: 1px solid red;">
 		<!-- 头部区域 -->
 		<div id="header" style="width: 360px;height: 60px;background-color: #6200EE;">
-			<button type="button" class="btn btn-default" aria-label="Left Align">
+			<button type="button" class="btn btn-default" aria-label="Left Align" >
 			  <span class="glyphicon glyphicon-align-left" aria-hidden="true">疫情统计</span>
 			</button>	
 			<span style="font-size: 20px;color: white;line-height: 20px;">疫情统计</span>
@@ -147,7 +147,7 @@
 			<!-- 按钮+实时数据标签+横线 -->
 			<div id="info-header">
 				<button type="button" class="btn btn-primary btn-lg btn-block" id="static-button">疫情统计</button>
-				<div id="update_time" style="margin: 0 auto;border-radius: 15px;width: 60px;height: 24px;border: 1px solid #009999;
+				<div id="update_time" style="margin: 0 auto;border-radius: 15px;width: 120px;height: 24px;border: 1px solid #009999;
 					font-size: 12px;line-height: 24px;"></div>
 				<div id="info-header-line">
 					<div></div>
@@ -196,7 +196,7 @@
 					<div></div>
 					<div></div>
 				</div>
-				<button id="nowButton" type="button" class="btn btn-primary">现存确诊</button>
+				 <button id="nowButton" type="button" class="btn btn-primary">现存确诊</button> 
 				<button id="totalButton" type="button" class="btn btn-primary">累计确诊</button>
 			</div>
 			<!-- 图表区域 -->
@@ -211,6 +211,10 @@
 	<!--  <script type="text/javascript" src="js/juqery-3.3.1.js"></script>  -->
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script>
+//按钮的响应与跳转
+
+
+
 var chart = echarts.init(document.getElementById('main'));
 chart.setOption({
     title: {

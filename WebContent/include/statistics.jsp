@@ -200,8 +200,8 @@
 			<!-- 按钮+实时数据标签+横线 -->
 			<div id="info-header">
 				<button type="button" class="btn btn-primary btn-lg btn-block" id="static-button">疫情统计</button>
-				<div style="margin: 0 auto;border-radius: 15px;width: 60px;height: 24px;border: 1px solid #009999;
-					font-size: 12px;line-height: 24px;">实时数据</div>
+				<div id="update_time" style="margin: 0 auto;border-radius: 15px;width: 120px;height: 24px;border: 1px solid #009999;
+					font-size: 12px;line-height: 24px;"></div>
 				<div id="info-header-line">
 					<div></div>
 					<div></div>
@@ -212,37 +212,37 @@
 				
 				<!-- 显示6个数据项 -->
 				<div class="info-block">
-					<h1>现存确证</h1>
-					<p style="color: #D9001B;">51325</p>
-					<p>昨日+2</p>
+					<h1>累计确诊</h1>
+					<p id="confirm" style="color: #D9001B;"></p>
+					<p id="confirmAdd"></p>
 				</div>
 				<div class="info-block">
-					<h1>现存确证</h1>
-					<p style="color: #FF6A57;">51325</p>
-					<p>昨日+2</p>
+					<h1>现存确诊</h1>
+					<p  id="nowConfirm" style="color: #FF6A57;"></p>
+					<p id="nowconfirmAdd"></p>
 				</div>
 				<div class="info-block">
-					<h1>现存确证</h1>
-					<p style="color: #476DA0;">51325</p>
-					<p>昨日+2</p>
+					<h1>现存重症</h1>
+					<p  id="nowSevere" style="color: #476DA0;">51325</p>
+					<p id="SevereAdd"></p>
 				</div>
 				<div class="info-block">
-					<h1>现存确证</h1>
-					<p style="color: #02A7F0;">51325</p>
-					<p>昨日+2</p>
+					<h1>现存疑似</h1>
+					<p id="suspect" style="color: #02A7F0;">51325</p>
+					<p id="suspectAdd"></p>
 				</div>
 				<div class="info-block">
-					<h1>现存确证</h1>
-					<p style="color: #A30014;">51325</p>
-					<p>昨日+2</p>
+					<h1>累计死亡</h1>
+					<p id="dead" style="color: #A30014;">51325</p>
+					<p id="deadAdd"></p>
 				</div>
 				<div class="info-block">
-					<h1>现存确证</h1>
-					<p style="color: #70B603;">51325</p>
-					<p>昨日+2</p>
+					<h1>累计治愈</h1>
+					<p id="heal" style="color: #70B603;">51325</p>
+					<p id="healAdd"></p>
 				</div>		
 
-			</div>  
+			</div>    
 			<!-- 下横线+切换按钮 -->
 			<div id="info-buttom">
 				<div id="info-buttom-line">
@@ -266,116 +266,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	<script>
-	var chart = echarts.init(document.getElementById('main'));
-	chart.setOption({
-	    title: {
-	        text: '全国地图',
-	        subtext: '该页面的数据仅供参考',
-	    },
-	    tooltip: {
-	        formatter:function(params){
-	            /* return params.name+'<br />'+'确诊人数：'+params['data']['value']+'<br />'+'死亡人数：'
-	            +params['data']['dead']+'<br />'+'治愈人数：'+params['data']['cure']; */
-	        }//数据格式化
-	    },
-	    toolbox: {
-	        show: true,
-	        orient: 'vertical',
-	        left: 'right',
-	        top: 'center',
-	        feature: {
-	            dataView: {readOnly: false},
-	            restore: {},
-	            saveAsImage: {}
-	        }
-	    },
-	    visualMap: {
-	        min: 0,
-	        max: 40000,
-	        left: 'left',
-	        top: 'bottom',
-	        text: ['多','少'],
-	        inRange: {
-	            color: ['lightskyblue', 'yellow', 'orangered']
-	        },
-	        show:true
-	    },
-	    series: [{
-	        type: 'map',
-	        map: 'china',
-	        label:{
-	            show: true
-	        },
-	        nameMap:{
-	            
-	            "南海诸岛" : "南海诸岛",
-	             '北京'   :'北京市',
-	             '天津'   :'天津市',
-	             '上海'   :'上海市',
-	             '重庆'   :'重庆市',
-	             '河北'   :'河北省',
-	             '河南'   :'河南省',
-	             '云南'   :'云南省',
-	             '辽宁'   :'辽宁省',
-	             '黑龙江'  :  '黑龙江省',
-	             '湖南'   :'湖南省',
-	             '安徽'   :'安徽省',
-	             '山东'   :'山东省',
-	             '新疆' :'新疆维吾尔自治区',
-	             '江苏' :'江苏省',
-	             '浙江' :'浙江省',
-	             '江西' :'江西省',
-	             '湖北' :'湖北省',
-	             '广西' : '广西壮族自治区',
-	             '甘肃' :'甘肃省',
-	             '山西' :'山西省',
-	             '内蒙古' : "内蒙古自治区",
-	             '陕西'  :'陕西省',
-	             '吉林'  :'吉林省',
-	             '福建'  :'福建省',
-	             '贵州'  :'贵州省',
-	             '广东'  :'广东省',
-	             '青海'  :'青海省',
-	             '西藏'  :'西藏自治区',
-	             '四川'  :'四川省',
-	             '宁夏' :'宁夏回族自治区',
-	             '海南' :'海南省',
-	             '台湾' :'台湾',
-	             '香港' :'香港',
-	             '澳门' :'澳门'
-	        }
-	    }
-	    ]
-	});
-	
-	//异步加载数据
-		/* $.ajax({
-		   type : "get",
-		   async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
-		   url : "https://api.yonyoucloud.com/apis/dst/ncov/country",    //请求发送到TestServlet处
-		   success : function(resultJson) {
-		       var result = jQuery.parseJSON(resultJson);
-		       //请求成功时执行该函数内容，result即为服务器返回的json对象
-		       if (result) {
-	               chart.setOption({        //加载数据图表
-	                  series: [{
-	                      data: result
-	                  }]
-	              });
-		              
-		       }
-		  	},
-		   error : function(errorMsg) {
-		       //请求失败时执行该函数
-		   		alert("图表请求数据失败!");
-		   }
-		}); */
-		$(function() {
-			$("#main").click(function(e) {
-				console.log(e);
-			})
-		})
-		
 		$(function() {
 			$(".popup-icon").click(function() {
 				$("#popup").slideToggle();
@@ -383,6 +273,123 @@
 		})
 	</script>
 
+
+<script>
+//按钮的响应与跳转
+var chart = echarts.init(document.getElementById('main'));
+chart.setOption({
+    title: {
+        text: '全国地图',
+        subtext: '该页面的数据仅供参考',
+    },
+    tooltip: {
+    	trigger: 'item',
+    	formatter:function(params){
+    		return params.name+'<br />'+'确诊人数：'+params['data']['value']+'<br />'+'死亡人数：'
+            +params['data']['dead']+'<br />'+'治愈人数：'+params['data']['heal'];
+        }//数据格式化
+    },
+    toolbox: {
+        show: true,
+        orient: 'vertical',
+        left: 'right',
+        top: 'center',
+        feature: {
+            dataView: {readOnly: false},
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    visualMap: {
+    	type: 'piecewise',
+    	pieces: [
+    	 { min: 1000, max: 1000000, label: '大于等于1000人', color: '#372a28' },
+    	 { min: 500, max: 999, label: '确诊500-999人', color: '#4e160f' },
+    	 { min: 100, max: 499, label: '确诊100-499人', color: '#974236' },
+    	 { min: 10, max: 99, label: '确诊10-99人', color: '#ee7263' },
+    	 { min: 1, max: 9, label: '确诊1-9人', color: '#f5bba7' },
+    	 ],
+    	 color: ['#E0022B', '#E09107', '#A3E00B']
+    },
+    series: [{
+    	name: '累积确诊',
+        type: 'map',
+        map: 'china',
+        label:{
+            show: true
+        },
+    }
+    ]
+});
+
+//异步加载数据
+function getMapData() {
+	$.ajax({
+	   type: "get",
+	   url : "https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5",   
+	   dataType: "jsonp",
+	   success : function(data) {
+		   console.log(data.data)
+		   var res = data.data || "";
+	       res = JSON.parse(res)
+	       console.log(res.chinaTotal.confirm)
+	       
+	       document.getElementById("update_time").innerHTML=res.lastUpdateTime;
+	       
+	       document.getElementById("confirm").innerHTML=res.chinaTotal.confirm;
+	       document.getElementById("nowConfirm").innerHTML=res.chinaTotal.nowConfirm;
+	       document.getElementById("nowSevere").innerHTML=res.chinaTotal.nowSevere;
+	       document.getElementById("suspect").innerHTML=res.chinaTotal.suspect;
+	       document.getElementById("dead").innerHTML=res.chinaTotal.dead;
+	       document.getElementById("heal").innerHTML=res.chinaTotal.heal;
+	       
+	       
+	       document.getElementById("confirmAdd").innerHTML=res.chinaAdd.confirm;
+	       document.getElementById("nowconfirmAdd").innerHTML=res.chinaAdd.confirm;
+	       document.getElementById("SevereAdd").innerHTML=res.chinaAdd.nowSevere;
+	       document.getElementById("suspectAdd").innerHTML=res.chinaAdd.suspect;
+	       document.getElementById("deadAdd").innerHTML=res.chinaAdd.dead;
+	       document.getElementById("healAdd").innerHTML=res.chinaAdd.heal;
+	       
+	       
+	       
+	       var newArr = [];
+	       var total = [];
+	       if (res) {
+	           //获取到各个省份的数据
+	           var province = res.areaTree[0].children;
+	           for (var i = 0; i < province.length; i++) {
+	             var json = {
+	               name: province[i].name,
+	               value: province[i].total.confirm,
+	               suspect: province[i].total.suspect,
+	               dead: province[i].total.dead,
+	               heal: province[i].total.heal,
+	             }
+	             newArr.push(json)
+	           }
+	           
+	             console.log("111")
+	             console.log(newArr),
+	             chart.setOption({        //加载数据图表
+	                 series: [{
+	                     data: newArr
+	                 }]
+	             });        
+	       }
+	  },
+	   error : function(errorMsg) {
+	       //请求失败时执行该函数
+	   alert("图表请求数据失败!");
+	   }
+	});
+}
+
+
+getMapData();
+
+
+</script>
 
 </body>
 </html>

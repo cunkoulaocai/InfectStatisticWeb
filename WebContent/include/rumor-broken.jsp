@@ -8,6 +8,8 @@
 
 	<script src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
 	<script src="${pageContext.request.contextPath }/js/china.js"></script>
+	<script src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
+	<script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
 	<style type="text/css">
 		.news-block {
@@ -120,29 +122,29 @@
 			<!-- 制作假新闻的盒子 -->
 			<div class="news-block">
 				<img alt="谣" src="${pageContext.request.contextPath}/images/rumor-images.png">
-				<h1>专家说:抢购双黄连?</h1>
-				<p style="width: 296px;height: 54px;margin: 0 auto;">2013和2014年的国家药品不良反应监测年度报告显示，双黄连合剂（口服液、颗粒、胶囊、片）在中成药口服制剂中不良反应中分列第二名和第一名....</p>
-				<p style="float: right;margin-top: 10px;margin-right: 10px;"><a href="#">查看源消息</a></p>
+				<h1 class="title">专家说:抢购双黄连?</h1>
+				<p class="content" style="width: 296px;height: 54px;margin: 0 auto;">2013和2014年的国家药品不良反应监测年度报告显示，双黄连合剂（口服液、颗粒、胶囊、片）在中成药口服制剂中不良反应中分列第二名和第一名....</p>
+				<p class="source" style="float: right;margin-top: 10px;margin-right: 10px;"><a href="#">查看源消息</a></p>
 			</div>
 			
 			<div class="news-block">
 				<img alt="谣" src="${pageContext.request.contextPath}/images/rumor-images.png">
-				<h1>专家说:抢购双黄连?</h1>
-				<p style="width: 296px;height: 54px;margin: 0 auto;">2013和2014年的国家药品不良反应监测年度报告显示，双黄连合剂（口服液、颗粒、胶囊、片）在中成药口服制剂中不良反应中分列第二名和第一名....</p>
-				<p style="float: right;margin-top: 10px;margin-right: 10px;"><a href="#">查看源消息</a></p>
+				<h1 class="title">专家说:抢购双黄连?</h1>
+				<p  class="content" style="width: 296px;height: 54px;margin: 0 auto;">2013和2014年的国家药品不良反应监测年度报告显示，双黄连合剂（口服液、颗粒、胶囊、片）在中成药口服制剂中不良反应中分列第二名和第一名....</p>
+				<p class="source" style="float: right;margin-top: 10px;margin-right: 10px;"><a href="#">查看源消息</a></p>
 			</div>
 			
 			<div class="news-block">
 				<img alt="谣" src="${pageContext.request.contextPath}/images/rumor-images.png">
-				<h1>专家说:抢购双黄连?</h1>
-				<p style="width: 296px;height: 54px;margin: 0 auto;">2013和2014年的国家药品不良反应监测年度报告显示，双黄连合剂（口服液、颗粒、胶囊、片）在中成药口服制剂中不良反应中分列第二名和第一名....</p>
-				<p style="float: right;margin-top: 10px;margin-right: 10px;"><a href="#">查看源消息</a></p>
+				<h1 class="title">专家说:抢购双黄连?</h1>
+				<p  class="content" style="width: 296px;height: 54px;margin: 0 auto;">2013和2014年的国家药品不良反应监测年度报告显示，双黄连合剂（口服液、颗粒、胶囊、片）在中成药口服制剂中不良反应中分列第二名和第一名....</p>
+				<p class="source" style="float: right;margin-top: 10px;margin-right: 10px;"><a href="#">查看源消息</a></p>
 			</div>
 			<div class="news-block">
 				<img alt="谣" src="${pageContext.request.contextPath}/images/rumor-images.png">
-				<h1>专家说:抢购双黄连?</h1>
-				<p style="width: 296px;height: 54px;margin: 0 auto;">2013和2014年的国家药品不良反应监测年度报告显示，双黄连合剂（口服液、颗粒、胶囊、片）在中成药口服制剂中不良反应中分列第二名和第一名....</p>
-				<p style="float: right;margin-top: 10px;margin-right: 10px;"><a href="#">查看源消息</a></p>
+				<h1 class="title">专家说:抢购双黄连?</h1>
+				<p class="content" style="width: 296px;height: 54px;margin: 0 auto;">2013和2014年的国家药品不良反应监测年度报告显示，双黄连合剂（口服液、颗粒、胶囊、片）在中成药口服制剂中不良反应中分列第二名和第一名....</p>
+				<p class="source" style="float: right;margin-top: 10px;margin-right: 10px;"><a href="#">查看源消息</a></p>
 			</div>
 		</div>
 		
@@ -153,6 +155,7 @@
 		</div>
 	</div>
 	
+
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
@@ -162,5 +165,36 @@
 		})
 	})
 	</script>
+
+	<script type="text/javascript">
+		function loadData() {
+			XHR = new XMLHttpRequest();
+			XHR.open('GET', 'http://api.tianapi.com/txapi/rumour/index?&key=dcd2cc2b1d430288b8c21a3647b375ba&num=50&rand=1', true);
+			XHR.send();
+			XHR.onreadystatechange = function() {
+				var data={};
+				if (XHR.readyState === 4 && XHR.status === 200) {
+					
+					// 从天行数据那获取数据之后解码为JSON对象。
+					getText = JSON.parse(XHR.responseText); 
+					data=getText.newslist;
+					
+				}
+				 var titles = document.getElementsByClassName("title");
+				 var contents = document.getElementsByClassName("content");
+				 var sources = document.getElementsByClassName("source");
+				 for(var i=0;i<titles.length;i++) {
+					   titles[i].innerHTML=data[i].title.substring(0,10)+"....";
+					   contents[i].innerHTML=data[i].desc;
+					   sources[i].innerHTML=data[i].author;
+				}
+			}
+		}
+		
+		loadData();
+	</script>
+
+	
+
 </body>
 </html>
