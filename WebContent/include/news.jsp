@@ -167,7 +167,7 @@
 				   var contents = document.getElementsByClassName("content");
 				   var sources = document.getElementsByClassName("source");
 				   for(var i=0;i<titles.length;i++) {
-					   titles[i].innerHTML=newArr[i].title;
+					   titles[i].innerHTML=newArr[i].title.substring(0,20)+"..";
 					   times[i].innerHTML=newArr[i].time;
 					   contents[i].innerHTML=newArr[i].content;
 					   sources[i].innerHTML=newArr[i].source;
