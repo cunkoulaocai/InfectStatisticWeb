@@ -321,6 +321,8 @@
     </script>
     
 <script type="text/javascript" src="${pageContext.request.contextPath }/data/getTrenddata.js"></script>
+    
+
 	
 	
 </body>

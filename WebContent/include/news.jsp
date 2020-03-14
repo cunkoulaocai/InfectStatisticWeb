@@ -176,7 +176,6 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath }/data/getNews.js"></script>
 
-
 	<script type="text/javascript">
 	$(function() {
 		$(".popup-icon").click(function() {

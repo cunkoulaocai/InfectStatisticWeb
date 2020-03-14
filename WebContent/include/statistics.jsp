@@ -274,5 +274,6 @@
 	</script>
 	
 <script type="text/javascript" src="${pageContext.request.contextPath }/data/getStatistic.js"></script>
+
 </body>
 </html>
