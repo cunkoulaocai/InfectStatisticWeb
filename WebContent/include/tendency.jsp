@@ -232,8 +232,6 @@
 
 			  	<span class="glyphicon glyphicon-align-left popup-icon" aria-hidden="true" style="font-size: 30px;color: white;"></span>
 
-			  	<span class="glyphicon glyphicon-align-left" aria-hidden="true" style="font-size: 30px;color: white;"></span>
-
 			</button>	
 			<span style="font-size: 20px;color: white;line-height: 20px;margin-left: 10px;">疫情趋势</span>
 			<button type="button" class="btn btn-default" aria-label="Justify" style="height: 60px;width: 40px;
@@ -297,17 +295,15 @@
 			
 			
 			<!-- 图表 -->
-			<div id="main" style="width: 334px;height: 263px;margin: 0 auto;"></div>
-
+			<!-- <div id="main" style="width: 334px;height: 263px;margin: 0 auto;"></div>
 				  	<li role="presentation" class="active" id="total">全国总体趋势</li>
 				  	<li role="presentation" id="now">全国累积确诊</li>
 				  	<li role="presentation" id="dead">全国累计死亡</li>
 				</ul>
-			</div>   
-			
+			</div>  -->  
 			
 			<!-- 图表 -->
-			<div id="chart" style="width: 334px;height: 263px;margin: 0 auto;"></div>
+			<div id="chart" style="width: 334px;height: 264px;margin: 0 auto;"></div>
 			<!-- <div id="main" style="width: 334px;height: 263px;margin: 0 auto;display: none;"></div>
 			<div id="main" style="width: 334px;height: 263px;margin: 0 auto;display: none;"></div> -->
 		</div>
@@ -330,7 +326,7 @@
 			})
 		})
     </script>
-<script type="text/javascript">
+	<script type="text/javascript">
 	var myChart = echarts.init(document.getElementById('chart'));
 	var dataSource = [];
 	var dimensions = ['日期', '累计确诊', '现有确诊（含重症）', '现有疑似', '现有重症', '累计死亡', '累计治愈',
@@ -721,9 +717,6 @@
 			setEchart2();
 		}
 			
-		
-	
-	
-</script>
+	</script>
 </body>
 </html>
